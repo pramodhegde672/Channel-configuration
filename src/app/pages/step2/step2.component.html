@@ -1,0 +1,69 @@
+<div class="form-body">
+  <div class="row">
+    <div class="form-holder">
+      <div class="form-content mb-2">
+        <div class="form-items">
+          <form class="requires-validation" novalidate>
+            <div class="col-md-12 p-2">
+              <input
+                class="form-control p-3"
+                type="text"
+                name="from"
+                placeholder="From"
+                required
+              />
+              <div class="valid-feedback">From field is valid!</div>
+              <div class="invalid-feedback">From field cannot be blank!</div>
+            </div>
+
+            <div class="col-md-12 p-2">
+              <input
+                class="form-control p-3"
+                type="text"
+                name="to"
+                placeholder="To"
+                required
+              />
+              <div class="valid-feedback">To field is valid!</div>
+              <div class="invalid-feedback">To field cannot be blank!</div>
+            </div>
+
+            <div class="col-md-12 p-2">
+              <label>From Date</label>
+              <input
+                class="form-control p-3"
+                type="date"
+                name="fromDate"
+                placeholder="fromDate"
+                required
+              />
+              <div class="valid-feedback">You selected a position!</div>
+              <div class="invalid-feedback">Please select a position!</div>
+            </div>
+
+            <div class="col-md-12 p-2">
+              <label>To Date</label>
+              <input
+                class="form-control p-3"
+                type="date"
+                name="toDate"
+                placeholder="toDate"
+                required
+              />
+              <div class="valid-feedback">Password field is valid!</div>
+              <div class="invalid-feedback">
+                Password field cannot be blank!
+              </div>
+            </div>
+
+            <div class="form-button mt-4 p-2">
+              <button id="submit" type="submit" class="btn btn-primary" (click)="gotoPage('step3')">
+                CONFIRM
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

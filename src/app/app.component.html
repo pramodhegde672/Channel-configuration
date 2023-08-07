@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button (click)="toggleSidenav()">
+      <mat-icon>compare_arrows</mat-icon>
+    </button>
+    <span>Channel Configurator</span>
+  </mat-toolbar>
+  
+  <mat-sidenav-container class="sidenav-container"  style="height: 100vh;">
+    <mat-sidenav #sidenav mode="side" opened style="width: 20%;">
+
+      <mat-nav-list>
+        <a mat-list-item routerLink="/home">Channels</a>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

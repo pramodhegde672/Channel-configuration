@@ -1,0 +1,33 @@
+<div style="display: flex; flex-direction: column; margin: 1rem; ">
+  <h2 mat-dialog-title style="text-transform: capitalize;">{{data.action}} {{prefixPath}}</h2>
+
+  <div *ngFor="let item of dynamicList">
+    <mat-form-field class="example-full-width">
+      <mat-label>{{item.label}}</mat-label>
+      <input matInput [(ngModel)]="item.value" (input)="saveValue(item)"/>
+    </mat-form-field>
+  </div>
+
+</div>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog()">Close</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onSubmit()"
+    *ngIf="loader == 0"
+  >
+    Submit
+  </button>
+  <div
+    style="margin-left: 2rem; margin-right: 1rem; padding: 4px"
+    *ngIf="loader == 1"
+  >
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="20"
+      strokeWidth="2"
+      value="30"
+    ></mat-progress-spinner>
+  </div>
+</mat-dialog-actions>

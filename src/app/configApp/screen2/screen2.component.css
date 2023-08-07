@@ -1,0 +1,44 @@
+.srno-cell {
+  width: 80px;
+}
+.parent {
+  margin: 1rem;
+}
+.child {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  margin: 4px;
+  justify-content: space-between;
+}
+.buttonsAlign {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  margin: 4px;
+}
+.labelInput {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.inputsSetter {
+  display: flex;
+  flex-direction: column;
+}
+.labelWidth {
+  width: 100px;
+}
+.dropdownWithInput {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.rowhover:hover {
+  transition: 0.2s ease-in-out;
+  background-color: aliceblue;
+  cursor: pointer;
+}
+.desc-cell {
+  width: 40rem;
+}

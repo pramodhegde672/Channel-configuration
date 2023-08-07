@@ -1,0 +1,76 @@
+<div class="parent">
+  <div>
+    <div class="child">
+      <div style="display: flex; gap: 10px">
+        <mat-form-field appearance="outline" style="width: 20rem">
+          <mat-label>Search</mat-label>
+          <input matInput placeholder="Placeholder" [(ngModel)]="search" />
+        </mat-form-field>
+        <button 
+          mat-icon-button
+          color="primary"
+          aria-label="Example icon button with a vertical three dot icon"
+        >
+          <mat-icon>filter_list</mat-icon>
+        </button>
+      </div>
+      <div class="buttonsAlign">
+        <button mat-stroked-button (click)="fetchData()">
+          <span class="material-symbols-outlined"> refresh </span>
+        </button>
+        <button mat-raised-button color="primary" (click)="createRow()">
+          Create
+        </button>
+      </div>
+    </div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="SrNo">
+        <th mat-header-cell *matHeaderCellDef>Sr No.</th>
+        <td mat-cell *matCellDef="let element; let i = index" class="srno-cell">
+          {{ i + 1 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdBy">
+        <th mat-header-cell *matHeaderCellDef>Created By</th>
+        <td mat-cell *matCellDef="let element">{{ element.createdBy }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastUpdated">
+        <th mat-header-cell *matHeaderCellDef>Last Updated</th>
+        <td mat-cell *matCellDef="let element">{{ element.lastUpdated }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element" class="actions-cell">
+          <mat-icon (click)="editRow(element)" class="edit">edit</mat-icon>
+          &nbsp;
+          <mat-icon (click)="deleteRow(element)" class="delete"
+            >delete</mat-icon
+          >
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (click)="onRowClick(row)"
+        class="rowhover"
+      ></tr>
+    </table>
+  </div>
+
+  <app-screen2 *ngIf="state === 1"></app-screen2>
+</div>
