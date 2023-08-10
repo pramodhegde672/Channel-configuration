@@ -2,11 +2,21 @@
   <h2 mat-dialog-title style="text-transform: capitalize;">{{data.action}} {{prefixPath}}</h2>
 
   <div *ngFor="let item of dynamicList">
-    <mat-form-field class="example-full-width">
-      <mat-label>{{item.label}}</mat-label>
-      <input matInput [(ngModel)]="item.value" (input)="saveValue(item)"/>
+    <mat-form-field class="example-full-width" *ngIf="!item.dropDown">
+      <mat-label>{{ item.label }}</mat-label>
+      <input matInput [(ngModel)]="item.value" (input)="saveValue(item)" />
+    </mat-form-field>
+  
+    <mat-form-field *ngIf="item.dropDown && data.value === 1">
+      <mat-label>Select Type</mat-label>
+      <mat-select  (selectionChange)="updateItemValue(item, $event)">
+        <mat-option *ngFor="let type of dropdownOptions" [value]="type.value">
+          {{ type.label }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
   </div>
+  
 
 </div>
 <mat-dialog-actions align="end">

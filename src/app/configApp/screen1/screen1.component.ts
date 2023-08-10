@@ -26,6 +26,7 @@ export class Screen1Component {
   loader = 0;
   state = 0;
 
+  _id = "";
   constructor(private dialog: MatDialog, private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -54,6 +55,7 @@ export class Screen1Component {
           value: 1,
           action: action,
           method: method,
+          _id: this._id
         },
       }
     );
@@ -69,22 +71,7 @@ export class Screen1Component {
     this.state = 1;
   }
 
-  onSubmit() {
-    this.loader = 1;
-    let payload = {
-      // hotelList: this.hotelList,
-    };
-    const apiUrl = 'https://adventuro-backend.onrender.com/app-create';
-
-    this.http.put(apiUrl, payload).subscribe(
-      (response: any) => {
-        this.loader = 0;
-      },
-      (error: any) => {
-        console.error('Error fetching data:', error);
-      }
-    );
-  }
+ 
 
   resetValues() {
     this.search = '';
@@ -96,13 +83,13 @@ export class Screen1Component {
   }
 
   editRow(rowData: any) {
-    console.log(rowData, 'edit clicked');
+    this._id = rowData._id;
     this.openDialog('edit', 'put');
   }
 
   deleteRow(rowData: any) {
-    console.log(rowData, 'delete clicked...hereh!');
-    const apiUrl = `https://adventuro-backend.onrender.com/app-delete/${rowData.name}`;
+    this._id = rowData._id;
+    const apiUrl = `https://adventuro-backend.onrender.com/app-delete/${rowData._id}`;
 
     this.http.delete(apiUrl).subscribe(
       (response: any) => {

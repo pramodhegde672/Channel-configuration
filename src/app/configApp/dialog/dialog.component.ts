@@ -24,6 +24,18 @@ export class DialogComponent {
   pathName: any = '';
   reqMethod: any = '';
 
+  _id = "";
+  dropdownOptions = [
+    {
+      label: "Normal",
+      value: "Normal"
+    },
+    {
+      label: "Intent",
+      value: "Intent"
+    }
+  ]
+
   @Output() dialogClosed = new EventEmitter<void>();
 
   constructor(
@@ -44,6 +56,7 @@ export class DialogComponent {
         {
           label: 'Type',
           accessor: 'type',
+          dropDown: true,
           value: '',
         },
         {
@@ -57,10 +70,27 @@ export class DialogComponent {
           value: '',
         },
       ];
-    } else {
+    } else if(this.data.value === 2){
       this.prefixPath = 'channel';
       this.suffixPath = console.log('from channels');
       this.dialogTitle = 'Create Channel';
+      this.dynamicList = [
+        {
+          label: 'Name',
+          accessor: 'name',
+          value: '',
+        },
+        {
+          label: 'Description',
+          accessor: 'desc',
+          value: '',
+        },
+      ];
+    }
+    else if(this.data.value===3){
+      this.prefixPath = 'channel';
+      this.suffixPath = console.log('from channels');
+      this.dialogTitle = 'Edit Channel';
       this.dynamicList = [
         {
           label: 'Name',
@@ -78,6 +108,8 @@ export class DialogComponent {
 
     this.pathName = this.prefixPath + '-' + this.suffixPath;
     this.reqMethod = this.data.method;
+
+    this._id = this.data._id;   
   }
 
   saveValue(item: any) {
@@ -89,12 +121,18 @@ export class DialogComponent {
     this.dialogClosed.emit();
   }
 
+  updateItemValue(item: any, event: any) {
+    item.value = event.value;
+  }
+
   onSubmit() {
     this.loader = 1;
 
     this.dynamicList.forEach((item: any) => {
       this.onSubmitData[item.accessor] = item.value;
     });
+    this.onSubmitData['_id'] = this._id; 
+    console.log(this.onSubmitData,'data is herre sdnjnks');
     let URL = `https://adventuro-backend.onrender.com/${this.prefixPath}-${this.suffixPath}`;
     this.makeDynamicRequest(URL, this.reqMethod, this.onSubmitData);
   }

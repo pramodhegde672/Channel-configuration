@@ -28,6 +28,8 @@ export class Screen2Component {
   loader = 0;
   state1 = 0;
 
+  _id = "";
+
   constructor(private dialog: MatDialog, private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -48,14 +50,16 @@ export class Screen2Component {
     );
   }
 
-  openDialog(): void {
+  
+  openDialog(value: number, action: string, method: string): void {
     const dialogRef: MatDialogRef<DialogComponent> = this.dialog.open(
       DialogComponent,
       {
         data: {
-          value: 2,
-          action: 'create',
-          method: 'post',
+          value: value,
+          action: action,
+          method: method,
+          _id: this._id
         },
       }
     );
@@ -104,13 +108,13 @@ export class Screen2Component {
   }
 
   editRow(rowData: any) {
-    alert('hello');
-    // console.log(rowData, 'edit clicked');
+    this._id = rowData._id;
+    this.openDialog(3,'edit','put')
   }
 
   deleteRow(rowData: any) {
     console.log(rowData, 'delete clicked...hereh!');
-    const apiUrl = `https://adventuro-backend.onrender.com/channel-delete/${rowData.name}`;
+    const apiUrl = `https://adventuro-backend.onrender.com/channel-delete/${rowData._id}`;
 
     this.http.delete(apiUrl).subscribe(
       (response: any) => {
